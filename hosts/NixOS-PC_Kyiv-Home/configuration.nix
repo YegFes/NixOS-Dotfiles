@@ -31,7 +31,6 @@
       };
       grub = {
         enable = true;
-	version = 2;
         devices = [ "nodev" ];
         efiInstallAsRemovable = true; # Otherwise /boot/EFI/BOOT/BOOTX64.EFI
         efiSupport = true;
