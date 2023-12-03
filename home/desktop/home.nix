@@ -36,11 +36,11 @@
     };
     zsh = {
       enable = true;
-      oh-my-zsh= {
-        enable = true;
-        plugins = ["git" "python" "docker" "fzf"];
-        theme = "dpoggi";
-      };
+      #oh-my-zsh= {
+      #  enable = true;
+      #  plugins = ["git" "python" "docker" "fzf"];
+      #  theme = "dpoggi";
+      #};
     };
   };
 
@@ -66,8 +66,8 @@
   };
 
   imports = [
-   # ./alacritty.nix
-   # ./cli
+    ./alacritty.nix
+    ./cli
    # ./dev
    # ./pkgs
    # ./system
