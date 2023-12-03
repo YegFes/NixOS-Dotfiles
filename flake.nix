@@ -62,13 +62,12 @@
                 useGlobalPkgs = false;
                 extraSpecialArgs = {inherit inputs;};
                 users.yegfes = ./home/desktop/home.nix;
-            };
+              };
+            }
             hyprland-nvidia.nixosModules.default
             {programs.hyprland.enable = true;}
-        ];
-      };
-    };
-
+          ];
+        };
    # home-manager configuration entrypoint
    # Available through 'home-manager --flake .#your-username@your-hostname'
    # homeConfigurations = {
