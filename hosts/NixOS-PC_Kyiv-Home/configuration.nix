@@ -104,7 +104,7 @@
       xwayland = {
         enable = true;
       };
-      enableNvidiaPatches = true;
+      # enableNvidiaPatches = true;
     };
   };
 
@@ -191,7 +191,7 @@
   };
 
   # Configure keymap in X11
-  services =
+  services = {
     # Enable CUPS to print documents.
     # printing.enable = true;
     xserver = {
@@ -212,7 +212,6 @@
       # };
       videoDrivers = ["nvidia"];
       layout = "us";
-      xkbVariant = "";
       xkbVariant = "";
       # Enable touchpad support (enabled default in most desktopManager).
       libinput = {
