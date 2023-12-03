@@ -99,7 +99,6 @@
       (import ../../overlays/firefox-overlay.nix)
     ];
     config = {
-      allowUnfreePredicate = pkg: true;
       packageOverrides = pkgs: {
         # integrates nur within Home-Manager
         nur =
