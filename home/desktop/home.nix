@@ -70,7 +70,7 @@
     ./cli
    # ./dev
    # ./pkgs
-   # ./system
+    ./system
    # ./themes
    # ./services
    # ./graphical
