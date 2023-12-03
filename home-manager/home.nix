@@ -21,6 +21,7 @@
         jq
         tree
         eza
+	neofetch
 	];
   
   programs.neovim = {
