@@ -12,11 +12,6 @@
     username = "yegfes";
     homeDirectory = "/home/yegfes";
     stateVersion = "24.05";
-
-  nixpkgs = {
-    config = {
-      allowUnfreePredicate = (_: true);
-    };
   };
 
   # This value determines the Home Manager release that your
@@ -99,6 +94,7 @@
       (import ../../overlays/firefox-overlay.nix)
     ];
     config = {
+      allowUnfreePredicate = (_: true);
       packageOverrides = pkgs: {
         # integrates nur within Home-Manager
         nur =
