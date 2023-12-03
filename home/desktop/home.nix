@@ -71,7 +71,7 @@
    # ./dev
    # ./pkgs
     ./system
-   # ./themes
+    ./themes
    # ./services
    # ./graphical
   ];
