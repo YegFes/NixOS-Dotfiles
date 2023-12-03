@@ -72,7 +72,7 @@
    # ./pkgs
     ./system
     ./themes
-   # ./services
+    ./services
    # ./graphical
   ];
 
