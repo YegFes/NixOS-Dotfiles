@@ -17,10 +17,11 @@
 
   # Bootloader.
   boot = {
-    initrd.luks.devices."luks-b6d3dd68-88b0-4e7f-a1e5-3642bfba1e8e".device = "/dev/disk/by-uuid/b6d3dd68-88b0-4e7f-a1e5-3642bfba1e8e";
+    #initrd.luks.devices."luks-b6d3dd68-88b0-4e7f-a1e5-3642bfba1e8e".device = "/dev/disk/by-uuid/b6d3dd68-88b0-4e7f-a1e5-3642bfba1e8e";
     # Kernel Modules
     kernelModules = ["v4l2loopback"]; # Autostart kernel modules on boot
     extraModulePackages = with config.boot.kernelPackages; [v4l2loopback]; # loopback module to make OBS virtual camera work
+    supportedFilesystems = [ "ntfs" ];
     loader = {
       systemd-boot.enable = false;
       timeout = 10;
