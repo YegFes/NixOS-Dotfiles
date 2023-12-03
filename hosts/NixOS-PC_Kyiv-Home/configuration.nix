@@ -26,16 +26,29 @@
       systemd-boot.enable = false;
       timeout = 10;
       efi = {
-        canTouchEfiVariables = false;
+        # canTouchEfiVariables = false;
         efiSysMountPoint = "/boot";
       };
       grub = {
         enable = true;
-        device = "nodev";
-	efiInstallAsRemovable = true;
+	version = 2;
+        devices = [ "nodev" ];
+        efiInstallAsRemovable = true; # Otherwise /boot/EFI/BOOT/BOOTX64.EFI
         efiSupport = true;
         useOSProber = true;
         configurationLimit = 3;
+
+	extraEntriesBeforeNixOS = true;
+	extraEntries = ''
+          menuentry "Reboot" {
+            reboot
+          }
+          menuentry "Poweroff" {
+            halt
+          }
+        '';
+
+
         theme =
           pkgs.fetchFromGitHub
           {
