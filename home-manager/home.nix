@@ -12,6 +12,9 @@
 		};
 	};
 
+  imports = [
+	./alacritty.nix
+    ];
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   home.packages = with pkgs; [
@@ -22,6 +25,7 @@
         tree
         eza
 	neofetch
+	(nerdfonts.override { fonts = ["JetBrainsMono" "Inconsolata"]; })
 	];
   
   programs.neovim = {

@@ -11,9 +11,12 @@
 
    # Hardware
    hardware.url = "github:nixos/nixos-hardware";
+
+   # Hyprland
+   hyprland.url = "github:hyprwm/Hyprland";
  };
 
- outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+ outputs = { self, nixpkgs, home-manager, hyprland, ... }@inputs: {
    # NixOS configuration entrypoint
    # Available through 'nixos-rebuild --flake .#your-hostname'
 
@@ -23,7 +26,9 @@
        specialArgs = { inherit inputs; }; # Pass flake inputs to our config
        # > Our main nixos configuration file <
        modules = [ 
-         ./nixos/configuration.nix
+	./nixos/configuration.nix
+	hyprland.nixosModules.default
+	{programs.hyprland.enable = true;}
        ];
      };
    };
