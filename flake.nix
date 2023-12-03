@@ -1,35 +1,45 @@
 {
-  description = "NixOS + standalone home-manager config flakes to get you started!";
+ description = "YegFes' NixOS Configuration"; #You can change this to whatever
 
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-  };
+ inputs = {
+   # Nixpkgs
+   nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-  outputs = {nixpkgs, ...}: let
-    forAllSystems = nixpkgs.lib.genAttrs [
-      "aarch64-linux"
-      "i686-linux"
-      "x86_64-linux"
-      "aarch64-darwin"
-      "x86_64-darwin"
-    ];
-  in {
-    templates = {
-      minimal = {
-        description = ''
-          Minimal flake - contains only the configs.
-          Contains the bare minimum to migrate your existing legacy configs to flakes.
-        '';
-        path = ./minimal;
-      };
-      standard = {
-        description = ''
-          Standard flake - augmented with boilerplate for custom packages, overlays, and reusable modules.
-          Perfect migration path for when you want to dive a little deeper.
-        '';
-        path = ./standard;
-      };
-    };
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
-  };
+   # Home manager
+   home-manager.url = "github:nix-community/home-manager";
+   home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+   # Hardware
+   hardware.url = "github:nixos/nixos-hardware";
+ };
+
+ outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+   # NixOS configuration entrypoint
+   # Available through 'nixos-rebuild --flake .#your-hostname'
+
+   nixosConfigurations = {
+     # Define your hostname
+     NixOS-PC_Kyiv-Home = nixpkgs.lib.nixosSystem {
+       specialArgs = { inherit inputs; }; # Pass flake inputs to our config
+       # > Our main nixos configuration file <
+       modules = [ 
+         ./nixos/configuration.nix
+       ];
+     };
+   };
+
+   # home-manager configuration entrypoint
+   # Available through 'home-manager --flake .#your-username@your-hostname'
+   homeConfigurations = {
+     # Define your username@hostname
+     "yegfes@NixOS-PC_Kyiv-Home" = home-manager.lib.homeManagerConfiguration {
+       pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+       extraSpecialArgs = { inherit inputs; }; # Pass flake inputs to our config
+       # > Our main home-manager configuration file <
+       modules = [ 
+           ./home-manager/home.nix 
+           ];
+     };
+   };
+ };
 }
