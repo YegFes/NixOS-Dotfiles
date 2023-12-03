@@ -66,14 +66,14 @@
   };
 
   imports = [
-    ./alacritty.nix
-    ./cli
-    ./dev
-    # ./pkgs
-    ./system
-    ./themes
-    ./services
-    ./graphical
+   # ./alacritty.nix
+   # ./cli
+   # ./dev
+   # ./pkgs
+   # ./system
+   # ./themes
+   # ./services
+   # ./graphical
   ];
 
   # Overlays
