@@ -26,7 +26,7 @@
       systemd-boot.enable = false;
       timeout = 10;
       efi = {
-        canTouchEfiVariables = true;
+        canTouchEfiVariables = false;
         efiSysMountPoint = "/boot";
       };
       grub = {
