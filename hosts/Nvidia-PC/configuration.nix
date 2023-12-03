@@ -17,7 +17,7 @@
 
   # Bootloader.
   boot = {
-    #initrd.luks.devices."luks-b6d3dd68-88b0-4e7f-a1e5-3642bfba1e8e".device = "/dev/disk/by-uuid/b6d3dd68-88b0-4e7f-a1e5-3642bfba1e8e";
+    initrd.luks.devices."luks-b6d3dd68-88b0-4e7f-a1e5-3642bfba1e8e".device = "/dev/disk/by-uuid/b6d3dd68-88b0-4e7f-a1e5-3642bfba1e8e";
     # Kernel Modules
     kernelModules = ["v4l2loopback"]; # Autostart kernel modules on boot
     extraModulePackages = with config.boot.kernelPackages; [v4l2loopback]; # loopback module to make OBS virtual camera work
@@ -48,13 +48,13 @@
         '';
 
 
-        theme =
-          pkgs.fetchFromGitHub
+         theme =
+           pkgs.fetchFromGitHub
           {
-            owner = "Lxtharia";
-            repo = "minegrub-theme";
-            rev = "193b3a7c3d432f8c6af10adfb465b781091f56b3";
-            sha256 = "1bvkfmjzbk7pfisvmyw5gjmcqj9dab7gwd5nmvi8gs4vk72bl2ap";
+            owner = "AdisonCavani";
+            repo = "distro-grub-themes";
+            rev = "v3.1";
+            sha256 = "sha256-ZcoGbbOMDDwjLhsvs77C7G7vINQnprdfI37a9ccrmPs=";
           };
 
         # theme = pkgs.fetchFromGitHub {
@@ -83,7 +83,7 @@
     dhcpcd.wait = "background";
     # avoid checking if IP is already taken to boot a few seconds faster
     dhcpcd.extraConfig = "noarp";
-    hostName = "NixOS-PC_Kyiv-Home"; # Define your hostname.
+    hostName = "Nvidia-PC"; # Define your hostname.
     # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     # Configure network proxy if necessary
     # proxy.default = "http://user:password@proxy:port/";

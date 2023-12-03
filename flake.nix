@@ -42,7 +42,7 @@
 
     nixosConfigurations = {
       # Define your hostname
-      NixOS-PC_Kyiv-Home = 
+      Nvidia-PC = 
         nixpkgs.lib.nixosSystem 
 	{
 	  system = "x86_64-linux";
@@ -54,7 +54,7 @@
           }; # Pass flake inputs to our config
         # > Our main nixos configuration file <
           modules = [ 
-            ./hosts/NixOS-PC_Kyiv-Home/configuration.nix
+            ./hosts/Nvidia-PC/configuration.nix
 	    home-manager.nixosModules.home-manager
 	    {
 	      home-manager = {
@@ -73,7 +73,7 @@
     # Available through 'home-manager --flake .#your-username@your-hostname'
     # homeConfigurations = {
        # Define your username@hostname
-    #   "yegfes@NixOS-PC_Kyiv-Home" = home-manager.lib.homeManagerConfiguration {
+    #   "yegfes@Nvidia-PC" = home-manager.lib.homeManagerConfiguration {
     #     pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
     #     extraSpecialArgs = { inherit inputs; }; # Pass flake inputs to our config
          # > Our main home-manager configuration file <
