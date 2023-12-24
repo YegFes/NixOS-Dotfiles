@@ -1,35 +1,30 @@
 {
   inputs,
-  config,
   pkgs,
-  osConfig,
-  lib,
   ...
 }: let
-  hyprland = inputs.hyprland-nvidia.packages.${pkgs.system}.hyprland-nvidia;
+  hyprland_flake = inputs.hyprland.packages.${pkgs.system}.hyprland;
   fontsize = "12";
-  primary_accent = "cba6f7";
-  secondary_accent = "89b4fa";
-  tertiary_accent = "f5f5f5";
-  tokyonight_blue = "8aadf4";
   oxocarbon_pink = "ff7eb6";
   oxocarbon_border = "393939";
   oxocarbon_background = "161616";
-  background = "11111B";
+  background = "rgba(11111B00)";
+  tokyonight_blue = "rgba(7aa2f7ee) rgba(87aaf8ee) 45deg";
+  tokyonight_background = "rgba(32344aaa)";
   opacity = ".85";
   cursor = "Numix-Cursor";
 in {
   wayland.windowManager.hyprland = {
     enable = true;
-    package = hyprland;
+    package = pkgs.hyprland;
     xwayland = {
       enable = true;
     };
-    enableNvidiaPatches = true;
     settings = {
-      # "$mainMod" = "SUPER";
+      "$mainMod" = "SUPER";
       monitor = [
-        "DP-3,1920x1080@165,0x0,auto"
+        ",highrr,auto,1"
+        # "DP-3,1920x1080@165,0x0,auto"
       ];
 
       xwayland = {
@@ -59,8 +54,8 @@ in {
         gaps_in = 1;
         gaps_out = 2;
         border_size = 3;
-        "col.active_border" = "rgb(${oxocarbon_border})";
-        "col.inactive_border" = "rgba(${background}00)";
+        "col.active_border" = "${tokyonight_blue}";
+        "col.inactive_border" = "${tokyonight_background}";
         layout = "dwindle";
         apply_sens_to_raw = 1; # whether to apply the sensitivity to raw input (e.g. used by games where you aim using your mouse)
       };
@@ -72,10 +67,10 @@ in {
         shadow_range = 20;
         shadow_render_power = 3;
         "col.shadow" = "rgb(${oxocarbon_background})";
-        "col.shadow_inactive" = "rgb(${background})";
+        "col.shadow_inactive" = "${background}";
         blur = {
           enabled = true;
-          size = 6;
+          size = 5;
           passes = 3;
           new_optimizations = true;
           ignore_opacity = true;
@@ -217,16 +212,14 @@ in {
         # "SUPER $mainMod SHIFT, 9, movetoworkspacesilent, 9"
         # "SUPER $mainMod SHIFT, 0, movetoworkspacesilent, 10"
 
-        # "SUPER,RETURN,exec,st"
-        "SUPER,RETURN,exec,foot"
-        # "SUPER,RETURN,exec,wezterm"
+        "SUPER,RETURN,exec,kitty"
+        "ALT,RETURN,exec,foot"
         "SUPER,n,exec,neovide"
         "SUPER,e,exec,emacsclient -c -a 'emacs'"
         "SUPER,o,exec,anytype --use-gl=desktop"
         ",Print,exec,~/.config/hypr/scripts/screenshot.sh"
         "SUPER,space,exec,bemenu-run"
         # "SUPER,z,exec,waybar"
-        # "SUPER,n,exec,~/.local/bin/lvimn"
         # "SUPER,space,exec, tofi-drun --drun-launch=true"
         # SUPER,space,exec,wofi --show drun -I -s ~/.config/wofi/style.css DP-3
         # "SUPER SHIFT,V,exec,~/.config/eww/fool_moon/bar/scripts/widgets toggle-clip"
@@ -259,7 +252,6 @@ in {
         # Window rules
         "tile,title:^(kitty)$"
         "float,title:^(fly_is_kitty)$"
-        "opacity 1.0 override 1.0 override,^(foot)$" # Active/inactive opacity
         "tile,^(Spotify)$"
         "tile,^(neovide)$"
         "tile,^(wps)$"
@@ -294,7 +286,11 @@ in {
     extraConfig = ''
            # source = ~/.config/hypr/themes/catppuccin-macchiato.conf
            # source = ~/.config/hypr/themes/oxocarbon.conf
-
+           env = LIBVA_DRIVER_NAME,nvidia
+           env = XDG_SESSION_TYPE,wayland
+           env = GBM_BACKEND,nvidia-drm
+           env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+           env = WLR_NO_HARDWARE_CURSORS,1
       #     # will switch to a submap called resize
       #     bind=$mainMod,R,submap,resize
       #
