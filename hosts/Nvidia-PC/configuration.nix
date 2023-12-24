@@ -228,7 +228,7 @@
           enable = true;
           enableContribAndExtras = true;
         };
-      # };
+      };
       videoDrivers = ["nvidia"];
       layout = "us";
       xkbVariant = "";
