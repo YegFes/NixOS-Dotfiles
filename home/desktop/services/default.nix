@@ -1,8 +1,10 @@
 _: {
   imports = [
     ./obs
+    ./git
     ./wayland
-    # ./webcord
+    ./socials
     ./browsers
+    ./spicetify
   ];
 }
