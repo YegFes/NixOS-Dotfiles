@@ -1,11 +1,5 @@
 
-{ 
-  config, 
-  pkgs, 
-  inputs, 
-  lib, 
-  ... 
-}: {
+{...}: {
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
@@ -26,44 +20,43 @@
   # Let Home Manager install and manage itself.
 
   programs = {
-    home-manager = {
-      enable = true;
-    };
-    neovim = {
-      enable = true;
-      viAlias = true;
-      vimAlias = true;
-    };
-    zsh = {
-      enable = true;
+    home-manager.enable = true;
+
+    #neovim = {
+    #  enable = true;
+    #  viAlias = true;
+    #  vimAlias = true;
+    #};
+    #zsh = {
+    #  enable = true;
       #oh-my-zsh= {
       #  enable = true;
       #  plugins = ["git" "python" "docker" "fzf"];
       #  theme = "dpoggi";
       #};
-    };
+    #};
   };
 
-  home.packages = with pkgs; [
-    bat
-    fzf
-    ripgrep
-    jq
-    tree
-    eza
-    neofetch
-    (nerdfonts.override { fonts = ["JetBrainsMono" "Inconsolata"]; })
-    ];
+  #home.packages = with pkgs; [
+  #  bat
+  #  fzf
+  #  ripgrep
+  #  jq
+  #  tree
+  #  eza
+  #  neofetch
+  #  (nerdfonts.override { fonts = ["JetBrainsMono" "Inconsolata"]; })
+  #  ];
 
-  home.sessionVariables = {
-    EDITOR="nvim";
-  };
+  #home.sessionVariables = {
+  #  EDITOR="nvim";
+  #};
 
-  home.shellAliases = {
-    l = "eza";
-    ls = "eza";
-    cat = "bat";
-  };
+  #home.shellAliases = {
+  #  l = "eza";
+  #  ls = "eza";
+  #  cat = "bat";
+  #};
 
   imports = [
     ./alacritty.nix
@@ -79,22 +72,22 @@
   # Overlays
   nixpkgs = {
     overlays = [
-      (self: super: {
-        discord = super.discord.overrideAttrs (
-          _: {
-            src = builtins.fetchTarball {
-              url = "https://discord.com/api/download?platform=linux&format=tar.gz";
-            };
-          }
-        );
-      })
+      #(self: super: {
+      #  discord = super.discord.overrideAttrs (
+      #    _: {
+      #      src = builtins.fetchTarball {
+      #        url = "https://discord.com/api/download?platform=linux&format=tar.gz";
+      #      };
+      #    }
+      #  );
+      #})
       # (import (builtins.fetchTarball {
       #   url = "https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz";
       # }))
       (import ../../overlays/firefox-overlay.nix)
     ];
     config = {
-      allowUnfreePredicate = (_: true);
+      allowUnfreePredicate = pkg: true;
       packageOverrides = pkgs: {
         # integrates nur within Home-Manager
         nur =
