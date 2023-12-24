@@ -223,11 +223,11 @@
         # xfce.enable = true;
         gnome.enable = true;
       };
-      # windowManager = {
-        # xmonad = {
-          # enable = true;
-          # enableContribAndExtras = true;
-        # };
+      windowManager = {
+        xmonad = {
+          enable = true;
+          enableContribAndExtras = true;
+        };
       # };
       videoDrivers = ["nvidia"];
       layout = "us";
