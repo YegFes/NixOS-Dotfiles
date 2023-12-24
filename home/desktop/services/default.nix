@@ -6,5 +6,6 @@ _: {
     ./socials
     ./browsers
     ./spicetify
+    #./webcord
   ];
 }
