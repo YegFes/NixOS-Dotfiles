@@ -1,14 +1,12 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    monaspace
+    nerdfix # Fix obsolete nerd font icons
     noto-fonts
     dejavu_fonts
     font-awesome
-    # powerline-fonts
-    # cantarell-fonts
     fira-code-symbols
     powerline-symbols
     material-design-icons
-    (nerdfonts.override {fonts = ["IBMPlexMono" "CascadiaCode" "FiraCode" "JetBrainsMono" "SourceCodePro"];})
+    (nerdfonts.override {fonts = ["IBMPlexMono" "CascadiaCode" "FiraCode" "FiraMono" "JetBrainsMono" "IntelOneMono"];})
   ];
 }
