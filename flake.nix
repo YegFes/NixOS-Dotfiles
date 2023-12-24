@@ -47,10 +47,7 @@
 	{
 	  system = "x86_64-linux";
           specialArgs = { 
-	    inherit 
-              inputs
-	      hyprland-nvidia
-	      ; 
+	    inherit inputs hyprland-nvidia; 
           }; # Pass flake inputs to our config
         # > Our main nixos configuration file <
           modules = [ 

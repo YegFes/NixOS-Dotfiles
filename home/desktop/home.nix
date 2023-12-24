@@ -73,7 +73,7 @@
     ./system
     ./themes
     ./services
-   # ./graphical
+    ./graphical
   ];
 
   # Overlays
