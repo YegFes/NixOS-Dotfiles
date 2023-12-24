@@ -5,6 +5,12 @@
     # Nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    # NixOS-WSL
+    NixOS-WSL = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Home manager
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -13,7 +19,7 @@
     hardware.url = "github:nixos/nixos-hardware";
 
     # Hyprland
-    hyprland-nvidia.url = "github:hyprwm/hyprland";
+    hyprland.url = "github:hyprwm/hyprland";
     waybar-hyprland.url = "github:hyprwm/hyprland";
     xdg-portal-hyprland.url = "github:hyprwm/xdg-desktop-portal-hyprland";
 
