@@ -21,6 +21,7 @@
     # Kernel Modules
     kernelModules = ["v4l2loopback"]; # Autostart kernel modules on boot
     extraModulePackages = with config.boot.kernelPackages; [v4l2loopback]; # loopback module to make OBS virtual camera work
+    kernelParams = ["nvidia.NVreg_PreserveVideoMemoryAllocations=1"];
     supportedFilesystems = [ "ntfs" ];
     loader = {
       systemd-boot.enable = false;
@@ -176,9 +177,9 @@
 
   environment = {
     variables = {
-      GBM_BACKEND = "nvidia-drm";
-      LIBVA_DRIVER_NAME = "nvidia";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      #GBM_BACKEND = "nvidia-drm";
+      #LIBVA_DRIVER_NAME = "nvidia";
+      #__GLX_VENDOR_LIBRARY_NAME = "nvidia";
       __GL_GSYNC_ALLOWED = "1";
       __GL_VRR_ALLOWED = "0"; # Controls if Adaptive Sync should be used. Recommended to set as “0” to avoid having problems on some games.
       XCURSOR_THEME = "macOS-BigSur";
@@ -188,14 +189,15 @@
     };
     sessionVariables = {
       NIXOS_OZONE_WL = "1"; # Hint electron apps to use wayland
-      WLR_NO_HARDWARE_CURSORS = "1"; # Fix cursor rendering issue on wlr nvidia.
+      #WLR_NO_HARDWARE_CURSORS = "1"; # Fix cursor rendering issue on wlr nvidia.
       DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox"; # Set default browser
     };
   };
 
   hardware = {
     nvidia = {
-      open = true;
+      open = false;
+      nvidiaSettings = true;
       powerManagement.enable = true;
       modesetting.enable = true;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
